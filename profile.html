@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h4>Perfil de usuario</h4>
+    <input id="name" type="text" placeholder="Name">
+    <input id="last" type="text" placeholder="Last name">
+    <input id="phone" type="text" placeholder="Phone number">
+    <button onclick="update_profile()">Actualizar información</button>
+    <button onclick="signout()">Cerrar sesión</button>
+
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+    <script>
+        const firebase = require("firebase");
+        // Required for side-effects
+        require("firebase/firestore");
+
+        // Initialize Cloud Firestore through Firebase
+        var firebaseConfig = {
+            apiKey: "AIzaSyA-Px88OFePLsB6Ei_SuUL8uL7tmGjbOj4",
+            authDomain: "focus-time2020.firebaseapp.com",
+            databaseURL: "https://focus-time2020.firebaseio.com",
+            projectId: "focus-time2020",
+            storageBucket: "focus-time2020.appspot.com",
+            messagingSenderId: "417325651643",
+            appId: "1:417325651643:web:43d10e4373b4275df1bb9e",
+            measurementId: "G-C35G7G14TT"
+        };
+
+        var db = firebase.firestore();
+        
+        function update_profile()
+        {
+            alert(document.getElementById("name").value+document.getElementById("last").value+document.getElementById("phone").value)
+
+            db.collection("users").add({
+                first: "Hola",
+                last: "hola",
+                phone: 320457812
+            })
+            .then(function(docRef) {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+        }
+
+        function signout(){
+            alert("Entré")
+            firebase.auth().signOut().then(function(){
+                alert("Entré2")
+                window.location="index.html";
+            }).catch(function(error){
+                alert("Error")
+            });
+        }
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+            } else {
+                // User is signed out.
+                window.location="index.html";
+            }
+        });
+    </script>
+
+    
+</body>
+</html>
