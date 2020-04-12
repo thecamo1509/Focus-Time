@@ -155,7 +155,7 @@
         var firebaseConfig = {
             apiKey: "AIzaSyA-Px88OFePLsB6Ei_SuUL8uL7tmGjbOj4",
             authDomain: "focus-time2020.firebaseapp.com",
-            databaseURL: "https://focus-time2020.firebaseio.com",
+            databaseURL: "https://focus-time2020.firebaseio.com/",
             projectId: "focus-time2020",
             storageBucket: "focus-time2020.appspot.com",
             messagingSenderId: "417325651643",
@@ -165,6 +165,9 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+        // Get a reference to the database service
+        var database = firebase.database();
         
         function profile()
         {
@@ -194,6 +197,25 @@
             // An error happened.
                 alert(error)
             });
+        }
+
+        function save_project(){
+            var user = firebase.auth().currentUser;
+            var project_name = document.getElementById("project_name").value;
+            var description = document.getElementById("description").value;
+            var due_date = document.getElementById("due_date").value;
+            var id = 3434;
+
+            function writeUserData(project_name, description, due_date) {
+                firebase.database().ref('projects').set({
+                    project_name: project_name,
+                    description: description,
+                    due_date:  due_date
+                }).catch(function(error) {
+                    console.log(error)
+                });
+            }
+
         }
     </script>
 </body>
