@@ -44,12 +44,12 @@
                 <div class="heading">
                     <h2 style="color: #0ea0ff;">YOUR PROJECTS</h2>
                     <div class="row">
-                        <div class="col"></div>
+                        <div class="col-mobile"></div>
                         <div class="col">
                             <br>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create new project</button>
                         </div>
-                        <div class="col"></div>
+                        <div class="col-mobile"></div>
                     </div>
                 </div>
 
@@ -60,23 +60,24 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">New project</h5>
+                        <h3 class="modal-title" id="exampleModalLabel" style="color: #0ea0ff;">New project</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="project_name" class="col-form-label">Project name:</label>
+                            <label for="project_name" class="col-form-label"><h5 class="modal-title" style="color: #505E6C;">Project name:</h5></label>
                             <input type="text" class="form-control" id="project_name">
                         </div>
                         <div class="form-group">
-                            <label for="description" class="col-form-label">Description:</label>
+                            <label for="description" class="col-form-label"><h5 class="modal-title" style="color: #505E6C;">Description:</h5></label>
                             <textarea class="form-control" id="description"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="due_date" class="col-form-label">Due date:</label><br>
-                            <input type="date" id="due_date">
+                        <div class="md-form">
+                            <label for="date-picker-example"><h5 class="modal-title" style="color: #505E6C;">Due Date:</h5>
+                            </label>
+                            <input placeholder="Selected date" type="text" id="date-picker-example" class="form-control datepicker">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -143,7 +144,8 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
-
+    <script>// Data Picker Initialization
+        $('.due_date').pickadate();</script>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
