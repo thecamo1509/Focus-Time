@@ -99,6 +99,60 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA-Px88OFePLsB6Ei_SuUL8uL7tmGjbOj4",
+            authDomain: "focus-time2020.firebaseapp.com",
+            databaseURL: "https://focus-time2020.firebaseio.com",
+            projectId: "focus-time2020",
+            storageBucket: "focus-time2020.appspot.com",
+            messagingSenderId: "417325651643",
+            appId: "1:417325651643:web:43d10e4373b4275df1bb9e",
+            measurementId: "G-C35G7G14TT"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        
+        function profile()
+        {
+            window.location="profile.html";
+        }
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+            } else {
+                // User is signed out.
+                window.location="index.html";
+            }
+        });
+
+        function signout(){
+            firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+                window.location="index.html";
+            }).catch(function(error) {
+            // An error happened.
+                alert(error)
+            });
+        }
+    </script>
 </body>
 
 </html>
