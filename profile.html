@@ -240,40 +240,6 @@
             }
         }
 
-        /*var update_photo = function()
-        {
-            upload_photo();
-        }
-
-        upload_photo = function()
-        {
-            var user = firebase.auth().currentUser;
-            var file = document.getElementById("my_file")[0].files[0];
-            console.log(file)
-            if (!file){}else
-            {
-                var storageRef = storage.ref("/avatars/"+file.name);
-
-                var uploadTask = storageRef.put(file);
-                uploadTask.on('state_changed', function(snapshot){
-
-                }, function(error){
-
-                }, function(){
-                        console.log("Archivo subido con éxito");
-
-                        var downloadURL = uploadTask.snapshot.downloadURL;
-
-                        user.updateProfile({
-                            photoURL: downloadURL
-                        });
-
-                        window.location.reload(true);
-                });
-            }
-            
-        }*/
-
         function signout(){
             firebase.auth().signOut().then(function() {
             // Sign-out successful.
