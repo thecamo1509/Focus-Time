@@ -33,9 +33,12 @@
             <div class="image-holder" style="background-image: url(&quot;assets/img/photo-of-woman-using-laptop-3194518.jpg&quot;);"></div>
             <form method="post">
                 <h2 class="text-center"><strong>Create</strong> an account.</h2>
-                <div class="form-group"><input class="form-control" type="email" name="email" placeholder="Email"></div>
-                <div class="form-group"><input class="form-control" type="password" name="password" placeholder="Password"></div>
-                <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color: #7f70f5;">Sign In</button><button class="btn btn-primary btn-block" type="submit" style="background-color: #7f70f5;">Sign Up</button></div><a class="already"
+                <div class="form-group"><input class="form-control" type="email" name="email" id="email" placeholder="Email"></div>
+                <div class="form-group"><input class="form-control" type="password" name="password" id="password" placeholder="Password"></div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" onclick="login()" style="background-color: #7f70f5;">Sign In</button>
+                    <button class="btn btn-primary btn-block" onclick="signup()" style="background-color: #7f70f5;">Sign Up</button>
+                </div><a class="already"
                     href="#">You already have an account? Login here.</a></form>
         </div>
     </div>
@@ -50,7 +53,68 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
     <script src="assets/js/theme.js"></script>
 
-    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA-Px88OFePLsB6Ei_SuUL8uL7tmGjbOj4",
+            authDomain: "focus-time2020.firebaseapp.com",
+            databaseURL: "https://focus-time2020.firebaseio.com",
+            projectId: "focus-time2020",
+            storageBucket: "focus-time2020.appspot.com",
+            messagingSenderId: "417325651643",
+            appId: "1:417325651643:web:43d10e4373b4275df1bb9e",
+            measurementId: "G-C35G7G14TT"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                window.location="app.html";
+            } else {
+                // User is signed out.
+                // ...
+            }
+        });
+
+        function login(){
+            let email=document.getElementById("email").value,
+            pass=document.getElementById("password").value;
+            firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+                // Handle Errors here.
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                alert(errorMessage)
+            });
+        }
+
+        function signup(){
+            let email=document.getElementById("email").value,
+            pass=document.getElementById("password").value;
+            alert(email)
+            firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+                // Handle Errors here.
+                let errorCode = error.code;
+                let errorMessage = error.message;
+                alert(errorMessage)
+            });
+        }
+    </script>
 </body>
 
 </html>
