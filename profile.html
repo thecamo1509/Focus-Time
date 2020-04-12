@@ -30,10 +30,10 @@
                         <ul class="nav navbar-nav flex-nowrap ml-auto">
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Oscar Tapias</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small" id="nameh">Full name</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
                                     <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
-                                        <a class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;My Projects</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                        <a class="dropdown-item" role="presentation" href="app.html"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;My Projects</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" onclick="signout()"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
                     </div>
                     </li>
                     </ul>
@@ -106,25 +106,31 @@
                                         <p class="text-primary m-0 font-weight-bold" style="color: #0ea0ff;">User Settings</p>
                                     </div>
                                     <div class="card-body">
-                                        <form>
+                                        <div class="form-big">
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label for="username" style="color: #505E6C;"><strong>Username</strong></label><input class="form-control" type="text" placeholder="user.name" name="username"></div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group"><label for="email" style="color: #505E6C;"><strong>Email Address</strong></label><input class="form-control" type="email" placeholder="user@example.com" name="email"></div>
+                                                    <div class="form-group"><label for="email" style="color: #505E6C;"><strong>Email Address</strong></label>
+                                                        <input class="form-control" type="email" placeholder="user@example.com" name="email" id="email">
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                    <div class="form-group"><label for="first_name" style="color: #505E6C;"><strong>First Name</strong></label><input class="form-control" type="text" placeholder="John" name="first_name"></div>
+                                                    <div class="form-group"><label for="name" style="color: #505E6C;"><strong>Full name</strong></label>
+                                                        <input class="form-control" type="text" placeholder="Name" name="name" id="name">
+                                                    </div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group"><label for="last_name" style="color: #505E6C;"><strong>Last Name</strong></label><input class="form-control" type="text" placeholder="Doe" name="last_name"></div>
+                                                    <div class="form-group"><label for="password" style="color: #505E6C;"><strong>New password</strong></label>
+                                                        <input class="form-control" type="password" placeholder="New password" name="password" id="password">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background: #7f70f5;">Save Settings</button></div>
-                                        </form>
+                                            <div class="form-group"><button class="btn btn-primary btn-sm" style="background: #7f70f5;">Save Settings</button></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="card shadow">
@@ -132,7 +138,7 @@
                                         <p class="text-primary m-0 font-weight-bold" style="color: #0ea0ff;">Contact Settings</p>
                                     </div>
                                     <div class="card-body">
-                                        <form>
+                                        <div class="form-big">
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label for="city" style="color: #505E6C;"><strong>City</strong></label><input class="form-control" type="text" placeholder="Los Angeles" name="city"></div>
@@ -142,7 +148,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group"><button class="btn btn-primary btn-sm" type="submit" style="background: #7f70f5;">Save&nbsp;Settings</button></div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -161,6 +167,74 @@
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="assets/js/theme.js"></script>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyA-Px88OFePLsB6Ei_SuUL8uL7tmGjbOj4",
+            authDomain: "focus-time2020.firebaseapp.com",
+            databaseURL: "https://focus-time2020.firebaseio.com",
+            projectId: "focus-time2020",
+            storageBucket: "focus-time2020.appspot.com",
+            messagingSenderId: "417325651643",
+            appId: "1:417325651643:web:43d10e4373b4275df1bb9e",
+            measurementId: "G-C35G7G14TT"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+        
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                document.getElementById("email").value = user.email;
+                document.getElementById("name").value = user.displayName;
+                document.getElementById("nameh").innerText = user.displayName;
+            } else {
+                // User is signed out.
+            }
+        });
+
+        var update = function(){
+            var name = document.getElementById("name").value;
+            var user = firebase.auth().currentUser;
+
+            user.updateProfile({
+                displayName: name
+                }).then(function() {
+                // Update successful.
+                }).catch(function(error) {
+                // An error happened.
+            });
+
+            var newPassword = document.getElementById("password").value;
+
+            if(newPassword.length > 0)
+            {
+                user.updatePassword(newPassword).then(function() {
+                // Update successful.
+                }).catch(function(error) {
+                // An error happened.
+                console.log(error)
+                });
+            }
+        }
+
+        function signout(){
+            firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+                window.location="login.html";
+            }).catch(function(error) {
+            // An error happened.
+                alert(error)
+            });
+        }
+    </script>
 </body>
 
 </html>
