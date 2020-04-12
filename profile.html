@@ -46,7 +46,9 @@
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" id="photo" width="160" height="160">
+                            <div class="card-body text-center shadow">
+                                <img class="rounded-circle mb-3 mt-4" id="photo" width="160" height="160">
+                                <!--<input type="file" id="my_file" style="display: none;">-->
                                 <div class="mb-3"><button class="btn btn-primary btn-sm" type="button" style="background: #7f70f5;" onclick="update_photo()">Change Photo</button></div>
                             </div>
                         </div>
@@ -172,6 +174,8 @@
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
+    <!--<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>-->
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
@@ -191,6 +195,8 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
+
+        //var storage = firebase.firestore();
         
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
@@ -234,10 +240,39 @@
             }
         }
 
-        var update_photo = function()
+        /*var update_photo = function()
         {
-            console.log("assets/img/avatars/avatar1.jpeg");
+            upload_photo();
         }
+
+        upload_photo = function()
+        {
+            var user = firebase.auth().currentUser;
+            var file = document.getElementById("my_file")[0].files[0];
+            console.log(file)
+            if (!file){}else
+            {
+                var storageRef = storage.ref("/avatars/"+file.name);
+
+                var uploadTask = storageRef.put(file);
+                uploadTask.on('state_changed', function(snapshot){
+
+                }, function(error){
+
+                }, function(){
+                        console.log("Archivo subido con éxito");
+
+                        var downloadURL = uploadTask.snapshot.downloadURL;
+
+                        user.updateProfile({
+                            photoURL: downloadURL
+                        });
+
+                        window.location.reload(true);
+                });
+            }
+            
+        }*/
 
         function signout(){
             firebase.auth().signOut().then(function() {

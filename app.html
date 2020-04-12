@@ -46,12 +46,48 @@
                     <div class="row">
                         <div class="col"></div>
                         <div class="col">
-                            <div class="d-flex justify-content-center align-items-center content" style="width: 500px;margin-top: 30px;margin-right: 0px;margin-left: 30px;padding-top: 7px;padding-bottom: 9px;padding-right: 0px;border: 1px solid;border-radius: 40px;border-color: #0ea0ff;"><i class="fa fa-pencil" style="color: rgb(148,152,156);font-size: 26px;width: 33px;"></i>
-                                <h3 style="margin-right: 40px;margin-bottom: 1px;color: rgb(148,152,156);margin-left: 22px;">New Project's Name</h3><button class="btn btn-outline-primary btn-lg" type="button" style="margin: 3px;">Create</button></div>
+                            <br>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Create new project</button>
                         </div>
                         <div class="col"></div>
                     </div>
                 </div>
+
+
+                
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">New project</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="project_name" class="col-form-label">Project name:</label>
+                            <input type="text" class="form-control" id="project_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="due_date" class="col-form-label">Due date:</label><br>
+                            <input type="date" id="due_date">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="save_project()">Save project</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-md-6 col-lg-4">
                         <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
