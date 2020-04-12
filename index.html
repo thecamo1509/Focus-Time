@@ -10,6 +10,7 @@
     <input id="emailL" type="text" placeholder="Email">
     <input id="passL" type="text" placeholder="Password">
     <button onclick="login()">Login</button>
+    <button onclick="loginGoogle()">Login Google</button>
     <button onclick="reset()">¿Ha olvidado la contraseña?</button>
     <h4>Sign up</h4>
     <input id="emailS" type="text" placeholder="Email">
@@ -41,13 +42,6 @@
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 // User is signed in.
-                var displayName = user.displayName;
-                var email = user.email;
-                var emailVerified = user.emailVerified;
-                var photoURL = user.photoURL;
-                var isAnonymous = user.isAnonymous;
-                var uid = user.uid;
-                var providerData = user.providerData;
                 window.location="main.html";
             } else {
                 // User is signed out.
@@ -58,7 +52,11 @@
         function login(){
             let email=document.getElementById("emailL").value,
             pass=document.getElementById("passL").value;
-            firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+            .then(function(res){
+                window.location="main.html";
+            })
+            .catch(function(error) {
                 // Handle Errors here.
                 let errorCode = error.code;
                 let errorMessage = error.message;
@@ -66,15 +64,51 @@
             });
         }
 
+        var loginGoogle = function(){
+            var provider = new firebase.auth.GoogleAuthProvider();
+
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                var user = result.user;
+                // ...
+                }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+        }
+
         function signup(){
             let email=document.getElementById("emailS").value,
             pass=document.getElementById("passS").value;
-            alert(email)
-            firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+            firebase.auth().createUserWithEmailAndPassword(email, pass)
+            .then(function(res){
+                window.location="main.html";
+            })
+            .catch(function(error) {
                 // Handle Errors here.
                 let errorCode = error.code;
                 let errorMessage = error.message;
                 alert(errorMessage)
+            });
+        }
+
+        var reset = function(){
+            var auth = firebase.auth();
+            var emailAddress = document.getElementById("emailL").value;
+            console.log(emailAddress)
+            auth.sendPasswordResetEmail(emailAddress).then(function() {
+            // Email sent.uba nada que 
+            }).catch(function(error) {
+            // An error happened.
+            console.log(error)
             });
         }
     </script>
