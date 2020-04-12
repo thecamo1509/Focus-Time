@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Focus Time - Dashboard</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
+    <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-white portfolio-navbar gradient">
+        <div class="container"><a class="navbar-brand logo" href="#">FOCUS TIME&nbsp;<i class="fas fa-clock"></i></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navbarNav"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div
+                class="collapse navbar-collapse" id="navbarNav">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" onclick="profile()">My Account</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" onclick="signout()">Log out</a></li>
+                </ul>
+        </div>
+        </div>
+    </nav>
+    <main class="page projets-page">
+        <section class="portfolio-block project-no-images">
+            <div class="container">
+                <div class="heading">
+                    <h2 style="color: #0ea0ff;">YOUR PROJECTS</h2>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="d-flex justify-content-center align-items-center content" style="width: 500px;margin-top: 30px;margin-right: 0px;margin-left: 30px;padding-top: 7px;padding-bottom: 9px;padding-right: 0px;border: 1px solid;border-radius: 40px;border-color: #0ea0ff;"><i class="fa fa-pencil" style="color: rgb(148,152,156);font-size: 26px;width: 33px;"></i>
+                                <h3 style="margin-right: 40px;margin-bottom: 1px;color: rgb(148,152,156);margin-left: 22px;">New Project's Name</h3><button class="btn btn-outline-primary btn-lg" type="button" style="margin: 3px;">Create</button></div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>Project Hyper</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">In Progress</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date: IN 12 HOURS&nbsp;&nbsp;</a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Demo Project #1</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">Start</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">Start</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
+                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
+                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
+                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="links"><a href="#">Profile</a><a href="#">My Projects</a><a href="#">Log Out</a></div>
+            <div class="social-icons"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-instagram-outline"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a></div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+
+</html>
