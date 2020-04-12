@@ -89,49 +89,8 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>Project Hyper</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">In Progress</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date: IN 12 HOURS&nbsp;&nbsp;</a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Demo Project #1</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">Start</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#">Start</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;">
-                            <h3><i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;Software Project #1</h3>
-                            <h4>Project Description and Tasks to be completed.</h4><a class="btn btn-outline-primary btn-sm" role="button" href="#" style="background-color: #23b84d;color: rgb(255,255,255);border-color: #23b84d;">FINISHED</a>
-                            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>04-06-2020</strong></a></div>
-                        </div>
-                    </div>
+                <div id="cards" class="row">
+                   
                 </div>
             </div>
         </section>
@@ -146,12 +105,14 @@
     <script src="assets/js/theme.js"></script>
     <script>// Data Picker Initialization
         $('.due_date').pickadate();</script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-app.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-database.js"></script>
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -168,8 +129,8 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
 
-        // Get a reference to the database service
-        var database = firebase.database();
+        var db = firebase.database();
+        var projects_conect = null;
         
         function profile()
         {
@@ -202,22 +163,43 @@
         }
 
         function save_project(){
-            var user = firebase.auth().currentUser;
+            
             var project_name = document.getElementById("project_name").value;
             var description = document.getElementById("description").value;
-            var due_date = document.getElementById("due_date").value;
-            var id = 3434;
+            var due_date = document.getElementById("date-picker-example").value;
+            var user = firebase.auth().currentUser;
+
+            projects_conect = db.ref("/projects/"+user.uid);
+            writeUserData(project_name, description, due_date);
 
             function writeUserData(project_name, description, due_date) {
-                firebase.database().ref('projects').set({
-                    project_name: project_name,
-                    description: description,
-                    due_date:  due_date
-                }).catch(function(error) {
-                    console.log(error)
+                var conectados = projects_conect.push( {
+                    project_name:project_name,
+                    description:description,
+                    due_date:due_date
                 });
             }
 
+            document.getElementById("cards").innerHTML += '<div class="col-md-6 col-lg-4">\
+            <div class="project-card-no-image" style="box-shadow: 0 2px 10px #0ea0ff;"><h3>\
+            <i class="fa fa-edit" style="color: rgb(140,148,156);"></i>&nbsp;'+project_name+'</h3>\
+            <h4>'+description+'</h4>\
+            <a class="btn btn-outline-primary btn-sm" role="button" href="#">Start</a>\
+            <div class="tags"><a href="#"><i class="fas fa-clock"></i>&nbsp;DUE date:&nbsp; <strong>'+due_date+'</strong></a></div>\<div>\</div>';
+        }
+
+        window.onload = function() {
+            recharge();
+        };
+
+        function recharge(){
+            var user = firebase.auth().currentUser;
+            console.log("user: ", user)
+            var projectCount = firebase.database().ref("projects/");
+                projectCount.on('value', function(snapshot) {
+            });
+
+            console.log("project:"+projectCount)
         }
     </script>
 </body>
